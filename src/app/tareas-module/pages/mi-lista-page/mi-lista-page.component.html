@@ -1,0 +1,8 @@
+<div class="row">
+  <tareas-module-tarea-card class="col-12 col-sm-6 col-md-6 col-lg-4"
+  *ngFor="let tarea of tareas; let i = index"
+  [tarea]="tarea"
+  [tareaIndex]="i"
+  (onStatusChange)="catchOnStatusChange()"
+  />
+</div>

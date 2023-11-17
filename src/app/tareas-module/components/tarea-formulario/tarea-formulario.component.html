@@ -1,0 +1,32 @@
+<div class="border-secondary mt-3">
+  <h3 class="text-center">Agregar nueva tarea</h3>
+  <form [formGroup]="TareaForm" (submit)="OnFormSubmit()" autocomplete="off">
+    <div class="form-floating mb-2">
+      <input class="form-control"
+      formControlName="titulo"
+      type="text"
+      id=""
+      placeholder="" >
+      <label for="titulo">*Título</label>
+    </div>
+    <span *ngIf="isFieldValid('titulo')"
+    class="text-danger">
+      El título es requerido y tiene que tener por lo menos 5 caracteres
+    </span>
+    <div class="form-floating mb-2">
+      <textarea class="form-control"
+      formControlName="descripcion"
+      id="descripcion" cols="30" rows="10" placeholder=""></textarea>
+      <label for="descripcion">*Descripción</label>
+    </div>
+    <span *ngIf="isFieldValid('descripcion')"
+    class="text-danger">
+      La descripción es requerida y tiene que tener por lo menos 5 caracteres
+    </span>
+    <!-- <span *ngIf="!isFieldValid('descripcion') && TareaForm.controls['name']"
+    class="text-success">
+      La descripción es correcta
+    </span> -->
+    <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+  </form>
+</div>

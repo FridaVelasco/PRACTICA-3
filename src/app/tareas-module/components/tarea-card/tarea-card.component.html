@@ -1,0 +1,59 @@
+<div class="card border-primary mt-2" *ngIf="tarea; else noTarea">
+  <!-- {{tarea|json}} -->
+  <div class="card-header text-center"
+  [ngClass]="
+  {
+  'bg-success': tarea.status == tareaStatus.completado,
+  'bg-danger': tarea.status == tareaStatus.retrasado,
+  'bg-warning': tarea.status == tareaStatus.pendiente
+  }
+    ">
+    <h2>{{tarea.titulo}}</h2>
+  </div>
+  <div class="card-body">
+    {{tarea.descripcion}}
+  </div>
+  <div class="card-footer"
+  [ngClass]="
+  {
+  'text-success': tarea.status == tareaStatus.completado,
+  'text-danger': tarea.status == tareaStatus.retrasado,
+  'text-warning': tarea.status == tareaStatus.pendiente
+  }
+    ">
+    <div class="text-center">
+      {{tarea.status}}
+    </div>
+    <div class="text-center" *ngIf="index>=0 && tarea.status != tareaStatus.completado">
+      <!-- hacer qeu cambie de color los botones segun el estado con clases dinamicas y botones dinamicos
+      si es mayor a cero aparecen los botones -->
+      <!-- ORIGINAL -->
+      <button
+      *ngIf="tarea.status != tareaStatus.retrasado"
+      (click)="changeStatus(tareaStatus.pendiente)"
+      class="btn btn-small btn-success">C</button>
+      <button
+      (click)="changeStatus(tareaStatus.completado)"
+      class="btn btn-small btn-danger">R</button>
+      <!-- <button
+      *ngIf="tarea.status !== tareaStatus.completado"
+      [ngClass]="{
+        'btn-success': tarea.status === tareaStatus.completado,
+        'btn-danger': tarea.status === tareaStatus.retrasado
+      }"
+      (click)="changeStatus(tareaStatus.pendiente)"
+      class="btn btn-small">C</button>
+    <button
+      *ngIf="tarea.status !== tareaStatus.completado"
+      [ngClass]="{
+        'btn-danger': tarea.status === tareaStatus.retrasado
+      }"
+      (click)="changeStatus(tareaStatus.completado)"
+      class="btn btn-small">R</button> -->
+    </div>
+  </div>
+</div>
+
+<ng-template #noTarea>
+  <h3 class="bg-warning w-100">No hay tarea para mostrar</h3>
+</ng-template>
